@@ -30,3 +30,10 @@
 - 이벤트 배지
     - 이벤트 배지가 부여되지 않는 경우, "없음"으로 출력
     - 총혜택 금액에 따라 이벤트 배지의 이름을 다르게 출력
+
+#### 폴더 내용
+- domain : 데이터
+- service : 메소드 제공
+- controller : service와 view 연결
+- view : UI부분 담당
+- exception : 예외 처리
