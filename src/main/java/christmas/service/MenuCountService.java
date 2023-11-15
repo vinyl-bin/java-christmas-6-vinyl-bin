@@ -9,23 +9,17 @@ import java.util.List;
 
 public class MenuCountService {
 
+    private final AllException allException = new AllException();
+
     public MenuCount setMenuCount(List<String> stringMenus, List<Integer> counts) {
         List<Menu> menus = new ArrayList<>();
 
         for(String stringMenu : stringMenus) {
-            Menu menu = stringToMenu(stringMenu);
+            Menu menu = allException.stringToMenu(stringMenu);
             menus.add(menu);
         }
+        allException.duplicateMenu(menus);
         MenuCount menuCount = new MenuCount(menus, counts);
         return menuCount;
-    }
-
-    private Menu stringToMenu(String stringMenu) {
-        for (Menu menuItem : Menu.values()) {
-            if (menuItem.name.equals(stringMenu)) {
-                return menuItem;
-            }
-        }
-        throw new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴입니다.");
     }
 }
