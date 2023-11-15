@@ -1,53 +1,48 @@
 package christmas.controller;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.DateInfo;
 import christmas.domain.MenuCount;
-import christmas.exception.AllException;
 import christmas.service.DateInfoService;
 import christmas.service.MenuCountService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 public class InputViewController {
-
-    private final AllException allException = new AllException();
     private final DateInfoService dateInfoService = new DateInfoService();
     private final MenuCountService menuCountService = new MenuCountService();
-
-    public DateInfo connectDateInfo(String str) {
-        int input = allException.stringToIntDate(str);
-        DateInfo dateInfo = dateInfoService.setDateInfo(input);
+    public DateInfo connectDateInfo() {
+        DateInfo dateInfo = null;
+        boolean keep = true;
+        while(keep) {
+            try {
+                String input = Console.readLine();
+                dateInfo = dateInfoService.saveDateInfo(input);
+                keep = false;
+            } catch (NoSuchElementException e) {
+                throw e;
+            } catch (Exception e){
+                keep=true;
+            }
+        }
         return dateInfo;
     }
 
-    public MenuCount connectMenuCount(String str) {
-        List<String> menus = splitMenu(str);
-        List<Integer> counts = splitCount(str);
-        MenuCount menuCount = menuCountService.setMenuCount(menus, counts);
+    public MenuCount connectMenuCount() {
+        MenuCount menuCount = null;
+        boolean keep = true;
+        while(keep) {
+            try {
+                String input = Console.readLine();
+                menuCount = menuCountService.saveMenuCount(input);
+                keep = false;
+            } catch (NoSuchElementException e) {
+                throw e;
+            } catch (Exception e){
+                keep=true;
+            }
+        }
         return menuCount;
     }
 
-    private List<String> splitMenu(String str) {
-        List<String> menus = new ArrayList<>();
-        String[] menuCounts = str.split(",");
-
-        for (String menuCount : menuCounts) {
-            String menu = menuCount.split("-")[0];
-            menus.add(menu);
-        }
-        return menus;
-    }
-
-    private List<Integer> splitCount(String str) {
-        List<Integer> counts = new ArrayList<>();
-        String[] menuCounts = str.split(",");
-
-        for (String menuCount : menuCounts) {
-            String strCount = menuCount.split("-")[1];
-            int count = allException.stringToIntMenu(strCount);
-            counts.add(count);
-        }
-        return counts;
-    }
 }
