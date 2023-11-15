@@ -10,17 +10,13 @@ public class Application {
     public static void main(String[] args) {
         OutputView outputView = new OutputView();
         InputView inputView = new InputView();
+
         outputView.printIntro();
+
         DateInfo dateInfo = inputView.readDate();
         MenuCount menuCount = inputView.readMenu();
+
         SaleInfo saleInfo = new SaleInfo(dateInfo, menuCount);
-        outputView.printBenefit(dateInfo);
-        outputView.printMenu(menuCount);
-        outputView.printMenuPrice(saleInfo);
-        outputView.printPresentMenu(saleInfo);
-        outputView.printBenefitListIntro(saleInfo);
-        int benefitPrice = outputView.printBenefitPrice(saleInfo);
-        outputView.printAfterPrice(saleInfo);
-        outputView.printBadge(benefitPrice);
+        outputView.printResult(dateInfo, menuCount, saleInfo);
     }
 }

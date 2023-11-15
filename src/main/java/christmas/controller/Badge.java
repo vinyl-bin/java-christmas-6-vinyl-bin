@@ -1,4 +1,4 @@
-package christmas.view;
+package christmas.controller;
 
 public enum Badge {
     STAR("별", 5000),

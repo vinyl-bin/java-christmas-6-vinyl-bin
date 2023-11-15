@@ -1,4 +1,4 @@
-package christmas.view;
+package christmas.controller;
 
 import java.util.Arrays;
 import java.util.List;
