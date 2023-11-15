@@ -9,6 +9,7 @@ public enum DateVoca {
      NONE_VALUE(-1),
      WEEKDAY(1),
      WEEKEND(2),
+     WEEK_SALE_PRICE(2023),
      SPECIAL(1);
 
 

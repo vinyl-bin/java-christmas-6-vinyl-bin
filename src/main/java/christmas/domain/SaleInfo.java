@@ -28,7 +28,8 @@ public class SaleInfo {
 
         List<Integer> saleList = new ArrayList<>();
         saleList.add(dDaySale(dateInfo));
-
+        saleList.add(weekdaySale(dateInfo, menuCount));
+        saleList.add
     }
 
     private int dDaySale(DateInfo dateInfo) {
@@ -37,5 +38,18 @@ public class SaleInfo {
         }
         int date = dateInfo.getDday();
         return DateVoca.START_PRICE.value+(date*DateVoca.ADD_PRICE.value);
+    }
+
+    private int weekdaySale(DateInfo dateInfo, MenuCount menuCount) {
+        if (dateInfo.getIsWeekdayWeekend() != DateVoca.WEEKDAY.value) {
+            return DateVoca.NONE_VALUE.value;
+        }
+        int sum = 0;
+        for (Menu menu : menuCount.getMenus()) {
+            if (menu.type.equals("디저트")) {
+                sum += DateVoca.WEEK_SALE_PRICE.value;
+            }
+        }
+        return sum;
     }
 }
