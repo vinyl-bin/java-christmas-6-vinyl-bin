@@ -5,6 +5,8 @@ import christmas.controller.InputViewController;
 import christmas.domain.DateInfo;
 import christmas.domain.MenuCount;
 
+import java.util.NoSuchElementException;
+
 public class InputView {
 
     private final InputViewController inputViewController = new InputViewController();
@@ -17,6 +19,8 @@ public class InputView {
                 String input = Console.readLine();
                 dateInfo = inputViewController.connectDateInfo(input);
                 keep = false;
+            } catch (NoSuchElementException e) {
+                throw e;
             } catch (Exception e){
                 keep=true;
             }
@@ -33,6 +37,8 @@ public class InputView {
                 String input = Console.readLine();
                 menuCount = inputViewController.connectMenuCount(input);
                 keep = false;
+            } catch (NoSuchElementException e) {
+                throw e;
             } catch (Exception e){
                 keep=true;
             }

@@ -21,6 +21,6 @@ public class Application {
         outputView.printBenefitListIntro(saleInfo);
         int benefitPrice = outputView.printBenefitPrice(saleInfo);
         outputView.printAfterPrice(saleInfo);
-
-        }
+        outputView.printBadge(benefitPrice);
+    }
 }

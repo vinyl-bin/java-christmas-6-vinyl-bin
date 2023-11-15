@@ -5,9 +5,12 @@ import christmas.domain.DateVoca;
 import christmas.domain.MenuCount;
 import christmas.domain.SaleInfo;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OutputView {
+
+    DecimalFormat decimalFormat = new DecimalFormat("#,###");
 
     public void printIntro() {
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
@@ -21,27 +24,26 @@ public class OutputView {
         System.out.println();
         System.out.println("<주문 메뉴>");
         for (int i = 0; i < menuCount.getMenus().size(); i++) {
-            System.out.print(menuCount.getMenus());
-            System.out.println(String.format(" %d개", menuCount.getCounts()));
+            System.out.print(menuCount.getMenus().get(i).name);
+            System.out.println(String.format(" %d개", menuCount.getCounts().get(i)));
         }
     }
 
     public void printMenuPrice(SaleInfo saleInfo) {
         System.out.println();
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(String.format(" %d개", saleInfo.getBeforePrice()));
+        System.out.println(String.format(" %s원", decimalFormat.format(saleInfo.getBeforePrice())));
     }
 
     public void printPresentMenu(SaleInfo saleInfo) {
         System.out.println();
         System.out.println("<증정 메뉴>");
         List<Integer> saleList = saleInfo.getSaleList();
-        if (saleList.get(DateVoca.PRESENT_SALE_INDEX.value) == DateVoca.NONE_VALUE.value) {
-            System.out.println("없음");
-        }
         if (saleList.get(DateVoca.PRESENT_SALE_INDEX.value) == DateVoca.PRESENT_SALE_PRICE.value) {
             System.out.println("샴페인 1개");
+            return;
         }
+        System.out.println("없음");
     }
 
     public void printBenefitListIntro(SaleInfo saleInfo) {
@@ -61,10 +63,10 @@ public class OutputView {
                 checkEmpty += 1;
                 continue;
             }
-            if (checkEmpty == saleInfo.getSaleList().size()) {
-                System.out.println("없음");
-            }
-            System.out.println(String.format("%s: -%d원", IndexValue.SALE_LIST.value.get(i), saleInfo.getSaleList().get(i)));
+            System.out.println(String.format("%s: -%s원", IndexValue.SALE_LIST.value.get(i), decimalFormat.format(saleInfo.getSaleList().get(i))));
+        }
+        if (checkEmpty == saleInfo.getSaleList().size()) {
+            System.out.println("없음");
         }
     }
 
@@ -93,6 +95,20 @@ public class OutputView {
     }
 
     public void printBadge(int benefitPrice) {
-
+        System.out.println();
+        System.out.println("<12월 이벤트 배지>");
+        if (benefitPrice >= Badge.SANTA.price) {
+            System.out.println(Badge.SANTA.name);
+            return;
+        }
+        if (benefitPrice >= Badge.TREE.price) {
+            System.out.println(Badge.TREE.name);
+            return;
+        }
+        if (benefitPrice >= Badge.STAR.price) {
+            System.out.println(Badge.STAR.name);
+            return;
+        }
+        System.out.println("없음");
     }
  }
