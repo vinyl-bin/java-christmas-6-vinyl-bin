@@ -2,7 +2,10 @@ package christmas.domain;
 
 public enum DateVoca {
 
+     LIMITIED_PRICE (10000),
      CHRISTMAS_DDAY(25),
+     START_PRICE(1000),
+     ADD_PRICE(100),
      NONE_VALUE(-1),
      WEEKDAY(1),
      WEEKEND(2),
@@ -10,10 +13,10 @@ public enum DateVoca {
 
 
 
-     public final int date;
+     public final int value;
 
-     DateVoca(int date) {
-          this.date = date;
+     DateVoca(int value) {
+          this.value = value;
      }
 
 }
