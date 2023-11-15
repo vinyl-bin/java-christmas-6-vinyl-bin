@@ -5,7 +5,6 @@ import christmas.Application;
 import christmas.domain.Menu;
 import christmas.domain.MenuCount;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MenuCountServiceTest extends NsTest {
