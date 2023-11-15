@@ -8,31 +8,26 @@ import java.util.Set;
 
 public class AllException {
 
-    private final int FIRST_DAY = 0;
+    private final int FIRST_DAY = 1;
     private final int LAST_DAY = 31;
 
-
+    /**날짜는 숫자만 입력**/
     public int stringToIntDate(String str) {
-        boolean isCorrect = false;
-        int input = 0;
-
-        while(!isCorrect) {
-            try {
-                input = Integer.parseInt(str);
-                isCorrect = isDate(input);
-            } catch (NumberFormatException e) {
-                System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
-            }
+        try {
+            int input = Integer.parseInt(str);
+            isDate(input);
+            return input;
+        } catch (NumberFormatException e) {
+            System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new NumberFormatException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
-        return input;
     }
 
-    private boolean isDate(int input) {
-        while(true) {
-            if(input > FIRST_DAY && input <= LAST_DAY) {
-                return true;
-            }
+    /**날짜는 1이상 31이하 숫자만 입력**/
+    private void isDate(int input) {
+        if(input < FIRST_DAY || input > LAST_DAY) {
             System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 

@@ -10,8 +10,17 @@ public class InputView {
     private final InputViewController inputViewController = new InputViewController();
     public DateInfo readDate() {
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해주세요!)");
-        String input = Console.readLine();
-        DateInfo dateInfo = inputViewController.connectDateInfo(input);
+        DateInfo dateInfo = null;
+        boolean keep = true;
+        while(keep) {
+            try {
+                String input = Console.readLine();
+                dateInfo = inputViewController.connectDateInfo(input);
+                keep = false;
+            } catch (Exception e){
+                keep=true;
+            }
+        }
         return dateInfo;
     }
 
