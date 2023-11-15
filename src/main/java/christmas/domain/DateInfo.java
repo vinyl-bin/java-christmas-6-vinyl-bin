@@ -34,6 +34,9 @@ public class DateInfo {
         return DateVoca.NONE_VALUE.date;
     }
 
+    public int getDate() {
+        return date;
+    }
     public int getDday() {
         return dday;
     }
