@@ -44,4 +44,32 @@ public class OutputView {
         }
     }
 
+    public void printBenefitListIntro(SaleInfo saleInfo) {
+        System.out.println();
+        System.out.println("<혜택 내역>");
+        if (saleInfo.getSaleList().size() == DateVoca.SALE_LIST_EMPTY_SIZE.value) {
+            System.out.println("없음");
+        }
+        if (saleInfo.getSaleList().size() != DateVoca.SALE_LIST_EMPTY_SIZE.value) {
+            printBenefitList(saleInfo);
+        }
+    }
+
+    private void printBenefitList(SaleInfo saleInfo) {
+        int checkEmpty = 0;
+        for (int i = 0; i < saleInfo.getSaleList().size(); i++) {
+            if (saleInfo.getSaleList().get(i) == DateVoca.NONE_VALUE.value) {
+                checkEmpty += 1;
+                continue;
+            }
+            if (saleInfo.getSaleList().get(i) == 0) {
+                checkEmpty += 1;
+                continue;
+            }
+            if (checkEmpty == saleInfo.getSaleList().size()) {
+                System.out.println("없음");
+            }
+            System.out.println(String.format("%s: -%d원", IndexValue.SALE_LIST.value.get(i), saleInfo.getSaleList().get(i)));
+        }
+    }
  }
