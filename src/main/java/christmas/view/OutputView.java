@@ -47,12 +47,7 @@ public class OutputView {
     public void printBenefitListIntro(SaleInfo saleInfo) {
         System.out.println();
         System.out.println("<혜택 내역>");
-        if (saleInfo.getSaleList().size() == DateVoca.SALE_LIST_EMPTY_SIZE.value) {
-            System.out.println("없음");
-        }
-        if (saleInfo.getSaleList().size() != DateVoca.SALE_LIST_EMPTY_SIZE.value) {
-            printBenefitList(saleInfo);
-        }
+        printBenefitList(saleInfo);
     }
 
     private void printBenefitList(SaleInfo saleInfo) {
@@ -71,5 +66,33 @@ public class OutputView {
             }
             System.out.println(String.format("%s: -%d원", IndexValue.SALE_LIST.value.get(i), saleInfo.getSaleList().get(i)));
         }
+    }
+
+    public int printBenefitPrice(SaleInfo saleInfo) {
+        System.out.println();
+        System.out.println("<총혜택 금액>");
+        int benefitPriceSum = 0;
+        List<Integer> saleList = saleInfo.getSaleList();
+        for(int i = 0; i < saleList.size(); i++) {
+            if (saleList.get(i) != 0 && saleList.get(i) != DateVoca.NONE_VALUE.value) {
+                benefitPriceSum += saleList.get(i);
+            }
+        }
+        if (benefitPriceSum != 0) {
+            System.out.println(String.format("-%d원", benefitPriceSum));
+            return benefitPriceSum;
+        }
+        System.out.println("0원");
+        return 0;
+    }
+
+    public void printAfterPrice(SaleInfo saleInfo) {
+        System.out.println();
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(String.format("%d원", saleInfo.getAfterPrice()));
+    }
+
+    public void printBadge(int benefitPrice) {
+
     }
  }

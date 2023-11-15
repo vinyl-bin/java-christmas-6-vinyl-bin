@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SaleInfo {
@@ -24,7 +25,7 @@ public class SaleInfo {
 
     private List<Integer> calculateSaleList(int beforePrice, DateInfo dateInfo, MenuCount menuCount) {
         if (beforePrice < DateVoca.LIMITIED_PRICE.value) {
-            return new ArrayList<>(DateVoca.NONE_VALUE.value);
+            return new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
         }
 
         List<Integer> saleList = new ArrayList<>();

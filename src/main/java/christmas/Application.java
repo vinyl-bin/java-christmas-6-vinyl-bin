@@ -18,6 +18,9 @@ public class Application {
         outputView.printMenu(menuCount);
         outputView.printMenuPrice(saleInfo);
         outputView.printPresentMenu(saleInfo);
+        outputView.printBenefitListIntro(saleInfo);
+        int benefitPrice = outputView.printBenefitPrice(saleInfo);
+        outputView.printAfterPrice(saleInfo);
 
-    }
+        }
 }
