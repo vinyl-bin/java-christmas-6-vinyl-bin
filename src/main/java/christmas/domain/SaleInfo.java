@@ -10,6 +10,7 @@ public class SaleInfo {
     public SaleInfo(DateInfo dateInfo, MenuCount menuCount) {
         this.beforePrice = calculateBeforePrice(menuCount);
         this.saleList = calculateSaleList(beforePrice, dateInfo, menuCount);
+        this.afterPrice = calculateAfterPrice(beforePrice, saleList);
     }
 
     private int calculateBeforePrice(MenuCount menuCount) {
@@ -30,6 +31,10 @@ public class SaleInfo {
         saleList.add(dDaySale(dateInfo));
         saleList.add(weekdaySale(dateInfo, menuCount));
         saleList.add(weekendSale(dateInfo, menuCount));
+        saleList.add(specialSale(dateInfo));
+        saleList.add(presentSale(beforePrice));
+
+        return saleList;
     }
 
     private int dDaySale(DateInfo dateInfo) {
@@ -64,5 +69,48 @@ public class SaleInfo {
             }
         }
         return sum;
+    }
+
+    private int specialSale(DateInfo dateInfo) {
+        if(dateInfo.getIsSpecial() != DateVoca.SPECIAL.value) {
+            return DateVoca.NONE_VALUE.value;
+        }
+        return DateVoca.SPECIAL_SALE_PRICE.value;
+    }
+
+    private int presentSale(int beforePrice) {
+        if (beforePrice < DateVoca.PRESENT_LIMITIED_PRICE.value) {
+            return DateVoca.NONE_VALUE.value;
+        }
+        return DateVoca.PRESENT_SALE_PRICE.value;
+    }
+
+    private int calculateAfterPrice(int beforePrice, List<Integer> saleList){
+        int minusValue = 0;
+        for(int i = 0; i < saleList.size(); i++) {
+            if (saleList.get(i) == 0) {
+                continue;
+            }
+            if (saleList.get(i) == DateVoca.NONE_VALUE.value) {
+                continue;
+            }
+            if (i == DateVoca.PRESENT_SALE_INDEX.value) {
+                continue;
+            }
+            minusValue += saleList.get(i);
+        }
+        return beforePrice - minusValue;
+    }
+
+    public int getBeforePrice() {
+        return beforePrice;
+    }
+
+    public List<Integer> getSaleList() {
+        return saleList;
+    }
+
+    public int getAfterPrice() {
+        return afterPrice;
     }
 }
