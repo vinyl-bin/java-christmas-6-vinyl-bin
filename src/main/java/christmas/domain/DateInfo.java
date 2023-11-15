@@ -33,4 +33,16 @@ public class DateInfo {
         }
         return DateVoca.NONE_VALUE.date;
     }
+
+    public int getDday() {
+        return dday;
+    }
+
+    public int getIsWeekdayWeekend() {
+        return isWeekdayWeekend
+    }
+
+    public int getIsSpecial() {
+        return isSpecial;
+    }
 }
