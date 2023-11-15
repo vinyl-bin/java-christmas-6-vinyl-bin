@@ -1,7 +1,11 @@
 package christmas.view;
 
 import christmas.domain.DateInfo;
+import christmas.domain.DateVoca;
 import christmas.domain.MenuCount;
+import christmas.domain.SaleInfo;
+
+import java.util.List;
 
 public class OutputView {
 
@@ -22,12 +26,22 @@ public class OutputView {
         }
     }
 
-    public void printMenuPrice(MenuCount menuCount) {
+    public void printMenuPrice(SaleInfo saleInfo) {
         System.out.println();
         System.out.println("<할인 전 총주문 금액>");
-        for (int i = 0; i < menuCount.getMenus().size(); i++) {
-            System.out.print(menuCount.getMenus());
-            System.out.println(String.format(" %d개", menuCount.getCounts()));
+        System.out.println(String.format(" %d개", saleInfo.getBeforePrice()));
+    }
+
+    public void printPresentMenu(SaleInfo saleInfo) {
+        System.out.println();
+        System.out.println("<증정 메뉴>");
+        List<Integer> saleList = saleInfo.getSaleList();
+        if (saleList.get(DateVoca.PRESENT_SALE_INDEX.value) == DateVoca.NONE_VALUE.value) {
+            System.out.println("없음");
+        }
+        if (saleList.get(DateVoca.PRESENT_SALE_INDEX.value) == DateVoca.PRESENT_SALE_PRICE.value) {
+            System.out.println("샴페인 1개");
         }
     }
+
  }
