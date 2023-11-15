@@ -39,7 +39,7 @@ public class DateInfo {
     }
 
     public int getIsWeekdayWeekend() {
-        return isWeekdayWeekend
+        return isWeekdayWeekend;
     }
 
     public int getIsSpecial() {
