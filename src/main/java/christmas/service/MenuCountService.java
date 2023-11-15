@@ -19,6 +19,8 @@ public class MenuCountService {
             menus.add(menu);
         }
         allException.duplicateMenu(menus);
+        allException.isOnlyBeverage(menus);
+        allException.isOverLimitedCount(counts);
         MenuCount menuCount = new MenuCount(menus, counts);
         return menuCount;
     }

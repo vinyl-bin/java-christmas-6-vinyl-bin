@@ -73,4 +73,25 @@ public class AllException {
         }
     }
 
+    public void isOnlyBeverage(List<Menu> menus) {
+        int beverageCount = 0;
+        for (Menu menu : menus) {
+            if (menu.type.equals("음료")) {
+                beverageCount++;
+            }
+        }
+        if (beverageCount == menus.size()) {
+            System.out.println("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
+            throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
+        }
+    }
+
+    public void isOverLimitedCount(List<Integer> counts) {
+        int countSum = counts.stream().mapToInt(Integer::intValue).sum();
+        if (countSum > 20) {
+            System.out.println("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+        }
+    }
+
 }
