@@ -14,24 +14,24 @@ public class DateInfo {
     }
 
     private int Dday(int date) {
-        if (date > DateVoca.CHRISTMAS_DDAY.date ) {
-            return DateVoca.NONE_VALUE.date;
+        if (date > DateVoca.CHRISTMAS_DDAY.value ) {
+            return DateVoca.NONE_VALUE.value;
         }
         return date-1;
     }
 
     private int IsWeekdayWeekend(int date) {
         if (date%7 == 1 || date%7 == 2) {
-            return DateVoca.WEEKEND.date;
+            return DateVoca.WEEKEND.value;
         }
-        return DateVoca.WEEKDAY.date;
+        return DateVoca.WEEKDAY.value;
     }
 
     private int IsSpecial(int date) {
         if (SpecialDate.SPECIAL_DATE.dates.contains(date)) {
-            return DateVoca.SPECIAL.date;
+            return DateVoca.SPECIAL.value;
         }
-        return DateVoca.NONE_VALUE.date;
+        return DateVoca.NONE_VALUE.value;
     }
 
     public int getDate() {
