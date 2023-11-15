@@ -21,7 +21,7 @@ public enum Menu {
     WINE("레드와인", "음료", 60000),
     SHAMPAGNE("샴페인", "음료", 25000);
 
-    private final String name;
+    public final String name;
     private final String type;
     private final int price;
 
